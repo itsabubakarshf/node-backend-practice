@@ -1,8 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
-import { ErrorResponse } from "./types/ErrorResponse";
+import { ErrorResponse } from "./types/IErrorResponse";
 import { Server } from "http";
-
+import connectDB from "./database/index"
+import { customLog } from "./utility/common";
 require('dotenv').config()
 
 const app = express();
@@ -11,6 +12,8 @@ app.use(helmet()) //protect the app from some well-known web vulnerabilities
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
+
+connectDB();
 
 app.get("/", (req: Request, res: Response) => {
   res.send("application is running");
@@ -44,13 +47,13 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 })
 
 const server: Server = app.listen(port, () => {
-  console.log(`Application is running on port ${port}`);
+  customLog(`Application is running on port ${port}`);
 });
 
 //Graceful shutdown
 process.on('SIGTERM', () => {
-  console.log('SIGTERM signal received: closing HTTP server');
+  customLog('SIGTERM signal received: closing HTTP server');
   server.close(() => {
-    console.log('HTTP server closed');
+    customLog('HTTP server closed');
   });
 });
