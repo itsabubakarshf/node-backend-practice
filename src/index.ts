@@ -7,7 +7,7 @@ require('dotenv').config()
 
 const app = express();
 app.disable('x-powered-by') //Reduce Fingerprinting
-app.use(helmet()) //protect your app from some well-known web vulnerabilities
+app.use(helmet()) //protect the app from some well-known web vulnerabilities
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
