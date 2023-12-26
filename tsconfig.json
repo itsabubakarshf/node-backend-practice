@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",        // Where to put the compiled JavaScript files
+    "rootDir": "./src",        // Where to find the TypeScript source files
+    "module": "commonjs",      // CommonJS modules for Node.js compatibility
+    "target": "es2019",        // ECMAScript target version
+    "esModuleInterop": true,   // Enable interoperability between CommonJS and ES Modules
+    "strict": true,            // Enable all strict type-checking options
+    "skipLibCheck": true       // Skip type checking of declaration files
+  },
+  "include": ["src/**/*.ts"],  // Include all .ts files in the src folder
+  "exclude": ["node_modules"]  // Exclude the node_modules folder
+}
