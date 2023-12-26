@@ -4,6 +4,10 @@ import { ErrorResponse } from "./types/IErrorResponse";
 import { Server } from "http";
 import connectDB from "./database/index"
 import { customLog } from "./utility/common";
+import {userRoutes} from "./routes/userRoute";
+import {pizzaRoutes} from "./routes/pizzaRoute";
+import {authRoutes} from "./routes/authRoutes";
+
 require('dotenv').config()
 
 const app = express();
@@ -20,7 +24,9 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // All other routes 
-//  app.use('/api', apiRouter);
+app.use('/api', userRoutes);
+app.use('/api', pizzaRoutes);
+app.use('/api', authRoutes)
 
 // Custom 404 Not Found handler
 app.use((req: Request, res: Response, next: NextFunction) => {
